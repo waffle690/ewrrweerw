@@ -11,11 +11,16 @@ function Сard(props) {
     setColr(!colr)
     props.addProdToCart(newProd);
   }
+  function clickAddButton2(newProdF) {
+    setBtnColr(!btnColr)
+    props.AddProdToCartF(newProdF);
+  }
+
 
   return <div className="mainCard">
     <Card style={{ width: '210px', height: '25  0px' }}>
-    <div className="btnserd">{btnColr ? <Button variant="outline-secondary" onClick={() => setBtnColr(!btnColr)}>♡
-</Button> : <Button variant="danger" onClick={() => setBtnColr(!btnColr)}>♥</Button>}</div>
+    <div className="btnserd">{btnColr ? <Button variant="outline-secondary" onClick={() => clickAddButton2({id: props.id, name: props.name , cost: props.cost , img: props.img})}>♡
+</Button> : <Button variant="danger" onClick={() => clickAddButton2({id: props.id, name: props.name , cost: props.cost , img: props.img})}>♥</Button>}</div>
       <Card.Img variant="top" src={props.img} style={{ width: '89px', height: '89px', margin: '10px auto 0px'}} />
       <Card.Body>
         <Card.Title className='cardTitle'>{props.name}</Card.Title>

@@ -11,7 +11,10 @@ function Cart(props) {
     let cards = props.cart.map(carpet => {
         return <BasketCard name = {carpet.name} cost={carpet.cost} img={carpet.img}/>
     })
-
+    let summ = 0
+    for (let i = 0; i < props.cart.length; i++) {
+    summ += Number(props.cart[i]['cost']) * props.cart[i]['count'];
+    }
     let styleOverflow = {}
     let styleSideBlock = {}
 
@@ -19,14 +22,21 @@ function Cart(props) {
         styleOverflow = { width: '100%' };
         styleSideBlock = { width: '385px' };
     }
-    else {
+    else{
         styleOverflow = { width: '0' };
         styleSideBlock = { width: '0' };
+        summ= 0
     }
-    let content = basket ?<>< img src='./img/ButtonBuy2.png' style={{ width: '320px', height: '320px'}} /></> :  
-<div className="BasketCards">
-{cards}
-</div>
+    if (summ===0) {
+        cards=<div style={{ height: '68vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}}>
+                  <h3 style={{ color: '#87C20A' }}>Корзина пустая</h3>
+                  <h5 style={{ color: '#999999' }}>Добавьте хотя бы один товар, чтобы сделать заказ.</h5>
+              </div>
+    }
+    let content = basket ?<><div style={{ height: '68vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}}>
+    <h3 style={{ color: '#87C20A' }}>Заказ оформлен</h3>
+    <h5 style={{ color: '#999999' }}>Ваш заказ #18 скоро будет передан курьерской доставке</h5>
+</div></> : <div className="BasketCards"> {cards} </div>
     return <>
         <div className='Overflow' style={styleOverflow} onClick={() => props.onOpenCart(false)}></div>
         <div className='container'>
@@ -37,9 +47,9 @@ function Cart(props) {
         </Stack> 
         {content}
 <div className='MainEnd'>
-<p>Итого:ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ184.600 р</p>
-<p>Налог:30%ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ42.600 р</p>
-<img src='./img/ButtonBuy.png' onClick={()=>setBasket(!basket)} id="Imagef" style={{ width: '320px', height: '55px'}} />
+<p>Итого:ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ{summ} р</p> 
+<p>Налог:30%ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ{summ*0.30}р</p>
+{basket ? <img src='./img/ButtonBuy.png' onClick={()=>setBasket(!basket)} id="Imagef" style={{ width: '320px', height: '55px'}} /> : <img src='./img/back.png' onClick={()=>setBasket(!basket)} id="Imagef" style={{ width: '320px', height: '55px'}} />}
 
 </div>
 

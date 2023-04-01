@@ -3,6 +3,10 @@ import './Header.css'
 import { Link } from 'react-router-dom';
 
 function Header(props) {
+//   let summ = 0
+// for (let i = 0; i < props.cart.length; i++) {
+// summ += Number(props.cart[i]['cost']) * props.cart[i]['count'];
+// }
 
   return <div className='mainHeader'>
 
@@ -22,7 +26,7 @@ function Header(props) {
         <img src="/img/Group.png" width={20} height={20} onClick={() => props.onOpenCart()} />
 
 
-        <span>140.000 рублей</span>
+        {/* <span>{summ} руб.</span> */}
         <Link to="/profile">
           <img src="/img/Union.svg" width={20} height={20} onClick="ProfileLink" />
         </Link>
